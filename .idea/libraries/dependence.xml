@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="dependence">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/src/main/dependence" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/src/main/dependence" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/src/main/dependence" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/src/main/dependence" recursive="false" type="SOURCES" />
+  </library>
+</component>
