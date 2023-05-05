@@ -1,0 +1,77 @@
+{
+  "type": "page",
+  "title": "网站头",
+  "body": [
+    {
+      "type": "tabs",
+      "tabs": [
+        {
+          "title": "首页",
+          "body": [
+            {
+              "type": "tpl",
+              "tpl": "内容",
+              "inline": false,
+              "id": "u:afffd9e7fa74"
+            }
+          ],
+          "id": "u:2b079202c113"
+        },
+        {
+          "title": "我要找人",
+          "body": [
+            {
+              "type": "tpl",
+              "tpl": "内容1",
+              "wrapperComponent": "",
+              "inline": false,
+              "id": "u:4d26705b1d1f"
+            }
+          ],
+          "id": "u:e4349a9aacd0"
+        },
+        {
+          "title": "我要发布",
+          "body": [
+            {
+              "type": "service",
+              "tpl": "内容2",
+              "wrapperComponent": "",
+              "inline": false,
+              "id": "u:7a4c314001b4",
+              "schemaApi":"get:/json/publish.json"
+            }
+          ],
+          "id": "u:25221b1db620"
+        }
+      ],
+      "id": "u:835e3e74e8da",
+      "toolbar": [
+        {
+          "type": "tpl",
+          "tpl": "迷途羔羊",
+          "inline": true,
+          "wrapperComponent": "",
+          "id": "u:823f4687920f",
+          "style": {
+            "fontFamily": "",
+            "fontSize": 19,
+            "fontStyle": "italic",
+            "textAlign": "center",
+            "color": "#7ed321"
+          }
+        }
+      ]
+    }
+  ],
+  "id": "u:c6475e9739b0",
+  "pullRefresh": {
+    "disabled": true
+  },
+  "regions": [
+    "body"
+  ],
+  "style": {
+    "boxShadow": " 0px 0px 0px 0px transparent"
+  }
+}
