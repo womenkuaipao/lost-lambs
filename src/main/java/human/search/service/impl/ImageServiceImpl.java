@@ -66,17 +66,9 @@ public class ImageServiceImpl implements ImageService {
          if(CollectionUtils.isEmpty(rects)){
             throw new BusinessException("未检测出人脸");
         }
-//        BufferedImage bufferedImage=null;
-//        try {
-////            bufferedImage= ImageIO.read(new ByteArrayInputStream(imageInfo.getImageData()));
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
         byte[] data = ((DataBufferByte) bufferedImage.getRaster().getDataBuffer()).getData();
-        Mat bigPicMat=new Mat(bufferedImage.getWidth(),bufferedImage.getHeight(), CvType.CV_8UC3);
-//        Mat bigPicMat=new Mat();
+        Mat bigPicMat=new Mat(bufferedImage.getHeight(),bufferedImage.getWidth(), CvType.CV_8UC3);
         bigPicMat.put(0,0,data);
-//        Mat bigPicMat=new Mat()
         FileTool.checkPath(imageTmpPath);
         String serverAddress = ApplicationTool.getContextInfo();
         for(int i=0;i<rects.size();i++){
