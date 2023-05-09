@@ -13,6 +13,7 @@ public class ExceptionAdvice {
 
     @ExceptionHandler(BusinessException.class)
     public BaseResult<String> businessExceptionHandle(BusinessException businessException){
+        logger.error(businessException.getMsg(),businessException.getCause());
         return BaseResult.fail(-1,businessException.getMsg(),null);
     }
 

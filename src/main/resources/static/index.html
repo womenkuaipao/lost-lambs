@@ -37,8 +37,11 @@
         // 通过替换下面这个配置来生成不同页面
         let amisJSON = {
           "type": "service",
+          "data":{
+            "root":"/lost-lambs"
+          },
           // title: '表单页面',
-          "schemaApi":"get:/json/main.json"
+          "schemaApi":"get:${root}/json/main.json"
         };
         let amisScoped = amis.embed('#root', amisJSON);
       })();

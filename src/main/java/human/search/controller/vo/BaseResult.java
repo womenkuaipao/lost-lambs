@@ -13,7 +13,7 @@ public class BaseResult<T> {
         this.data=data;
     }
     public static <T> BaseResult<T> success(T data){
-        return new BaseResult(0,null,data);
+        return new BaseResult(0,"成功",data);
     }
 
     public static <T> BaseResult<T> fail(int status,String msg,T data){

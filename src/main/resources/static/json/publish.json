@@ -1,142 +1,234 @@
 {
-    "type": "page",
-    "title": "",
-    "body": [
-      {
-        "type": "form",
-        "title": "",
-        "body": [
-          {
-            "label": "",
-            "type": "input-image",
-            "name": "imageUrl",
-            "id": "u:4ca8f9ff50ac",
-            "accept": ".jpeg, .jpg, .png, .gif",
-            "uploadType": "fileReceptor",
-            "proxy": true,
-            "multiple": false,
-            "hideUploadButton": false,
-            "autoUpload": true,
-            "fixedSize": false,
-            "required": true,
-            "limit": false
-          },
-          {
-            "type": "input-text",
-            "label": "姓名",
-            "name": "name",
-            "id": "u:7fc60ca71f05"
-          },
-          {
-            "type": "select",
-            "label": "性别",
-            "name": "gender",
-            "options": [
-              {
-                "label": "男",
-                "value": "1"
-              },
-              {
-                "label": "女",
-                "value": "2"
-              },
-              {
-                "label": "未知",
-                "value": "0"
-              }
-            ],
-            "id": "u:17fcd901e1a4",
-            "multiple": false,
-            "value": "0"
-          },
-          {
-            "type": "select",
-            "label": "年龄段",
-            "name": "ageGroup",
-            "options": [
-              {
-                "label": "婴儿",
-                "value": 1
-              },
-              {
-                "label": "儿童",
-                "value": 2
-              },
-              {
-                "label": "青年",
-                "value": "3"
-              },
-              {
-                "label": "中年",
-                "value": "4"
-              },
-              {
-                "label": "老年",
-                "value": "5"
-              },
-              {
-                "label": "未知",
-                "value": "0"
-              }
-            ],
-            "id": "u:1cc685744ae7",
-            "multiple": false,
-            "value": "0"
-          },
-          {
-            "type": "input-text",
-            "label": "地点",
-            "name": "address",
-            "id": "u:2c2edde69d97",
-            "validations": {
-              "maxLength": 50
+  "type": "page",
+  "title": "",
+  "body": [
+    {
+      "type": "form",
+      "title": "",
+      "body": [
+        {
+          "label": "",
+          "type": "input-image",
+          "name": "imageUrl",
+          "id": "u:4ca8f9ff50ac",
+          "accept": ".jpeg, .jpg, .png, .gif",
+          "uploadType": "fileReceptor",
+          "proxy": true,
+          "multiple": false,
+          "hideUploadButton": false,
+          "autoUpload": true,
+          "fixedSize": false,
+          "required": true,
+          "limit": false,
+          "receiver": {
+            "url": "/lost-lambs/image/detectImage",
+            "method": "post",
+            "messages": {
             },
-            "validationErrors": {
-              "maxLength": "长度不超过50个字符"
+            "autoFill": {
+              "myUrl": "${bkgUrl}"
+            },
+            "dataType": "form-data",
+            "requestAdaptor": "",
+            "adaptor": "",
+            "responseData": {
+              "&": "$$"
             }
           },
-          {
-            "type": "input-datetime",
-            "label": "日期",
-            "name": "snapTime",
-            "id": "u:f04d5a746b62",
-            "inputFormat": "YYYY-MM-DD HH:mm:ss",
-            "placeholder": "请选择日期以及时间",
-            "format": "X",
-            "minDate": "",
-            "maxDate": "",
-            "value": "${NOW()}"
-          },
-          {
-            "type": "textarea",
-            "label": "描述",
-            "name": "describe",
-            "id": "u:3c42d13b0f32",
-            "minRows": 3,
-            "maxRows": 20,
-            "validations": {
-              "maxLength": 500
-            },
-            "validationErrors": {
-              "maxLength": "最长不超过500个字符"
+          "onEvent": {
+            "success": {
+              "weight": 0,
+              "actions": [
+                {
+                  "dialog": {
+                    "type": "dialog",
+                    "title": "",
+                    "data": {
+                      "&": "$$"
+                    },
+                    "body": [
+                      {
+                      "type": "text",
+                      "name": "myUrl",
+                      "label": "url"
+                    },
+                      {
+                        "type": "tpl",
+                        "tpl": "123: ${bkgUrl}",
+                        "wrapperComponent": "",
+                        "inline": false,
+                        "id": "u:9fce5abe7d6b"
+                      },
+                      {
+                        "type": "grid",
+                        "columns": [
+                          {
+                            "body": [
+                              {
+                                "type": "image",
+                                "id": "u:4cf5f9344379",
+                                "width": 217,
+                                "height": 209,
+                                "enlargeAble": false,
+                                "src": "${bkgUrl}",
+                                "href": ""
+                              }
+                            ],
+                            "id": "u:74130260a060"
+                          },
+                          {
+                            "body": [
+                              {
+                                "type": "each",
+                                "name": "arr",
+                                "items": {
+                                  "type": "list-select",
+                                  "id": "u:163c8e4c699f",
+                                  "options": [
+                                    {
+                                      "image": "<%= data.item %>",
+                                      "value": "<%= data.item %>"
+                                    }
+                                  ]
+                                },
+                                "id": "u:ad61c2e4069f"
+                              }
+                            ],
+                            "id": "u:b5f876ff469e"
+                          }
+                        ],
+                        "id": "u:06ff743c8611"
+                      }
+                    ],
+                    "showCloseButton": true,
+                    "showErrorMsg": true,
+                    "showLoading": true,
+                    "id": "u:68e618a7c4a3",
+                    "closeOnEsc": false
+                  },
+                  "actionType": "dialog"
+                }
+              ]
             }
+          },
+          "bos": "default"
+        },
+        {
+          "type": "input-text",
+          "label": "姓名",
+          "name": "name",
+          "id": "u:7fc60ca71f05"
+        },
+        {
+          "type": "select",
+          "label": "性别",
+          "name": "gender",
+          "options": [
+            {
+              "label": "男",
+              "value": "1"
+            },
+            {
+              "label": "女",
+              "value": "2"
+            },
+            {
+              "label": "未知",
+              "value": "0"
+            }
+          ],
+          "id": "u:17fcd901e1a4",
+          "multiple": false,
+          "value": "0"
+        },
+        {
+          "type": "select",
+          "label": "年龄段",
+          "name": "ageGroup",
+          "options": [
+            {
+              "label": "婴儿",
+              "value": 1
+            },
+            {
+              "label": "儿童",
+              "value": 2
+            },
+            {
+              "label": "青年",
+              "value": "3"
+            },
+            {
+              "label": "中年",
+              "value": "4"
+            },
+            {
+              "label": "老年",
+              "value": "5"
+            },
+            {
+              "label": "未知",
+              "value": "0"
+            }
+          ],
+          "id": "u:1cc685744ae7",
+          "multiple": false,
+          "value": "0"
+        },
+        {
+          "type": "input-text",
+          "label": "地点",
+          "name": "address",
+          "id": "u:2c2edde69d97",
+          "validations": {
+            "maxLength": 50
+          },
+          "validationErrors": {
+            "maxLength": "长度不超过50个字符"
           }
-        ],
-        "mode": "horizontal",
-        "id": "u:f4dbd2774600",
-        "submitText": "提交"
-      }
-    ],
-    "id": "u:8d271f780f67",
-    "pullRefresh": {
-      "disabled": true
-    },
-    "asideResizor": false,
-    "style": {
-      "boxShadow": " 0px 0px 0px 0px transparent"
-    },
-    "regions": [
-      "body",
-      "header"
-    ]
-  }
+        },
+        {
+          "type": "input-datetime",
+          "label": "日期",
+          "name": "snapTime",
+          "id": "u:f04d5a746b62",
+          "inputFormat": "YYYY-MM-DD HH:mm:ss",
+          "placeholder": "请选择日期以及时间",
+          "format": "X",
+          "minDate": "",
+          "maxDate": "",
+          "value": "${NOW()}"
+        },
+        {
+          "type": "textarea",
+          "label": "描述",
+          "name": "describe",
+          "id": "u:3c42d13b0f32",
+          "minRows": 3,
+          "maxRows": 20,
+          "validations": {
+            "maxLength": 500
+          },
+          "validationErrors": {
+            "maxLength": "最长不超过500个字符"
+          }
+        }
+      ],
+      "mode": "horizontal",
+      "id": "u:f4dbd2774600",
+      "submitText": "提交"
+    }
+  ],
+  "id": "u:8d271f780f67",
+  "pullRefresh": {
+    "disabled": true
+  },
+  "asideResizor": false,
+  "style": {
+    "boxShadow": " 0px 0px 0px 0px transparent"
+  },
+  "regions": [
+    "body",
+    "header"
+  ]
+}

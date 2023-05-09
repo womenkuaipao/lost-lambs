@@ -5,6 +5,7 @@ import com.arcsoft.face.FaceInfo;
 import com.arcsoft.face.Rect;
 import com.arcsoft.face.toolkit.ImageFactory;
 import com.arcsoft.face.toolkit.ImageInfo;
+import human.search.controller.vo.DetectResult;
 import human.search.exception.BusinessException;
 import human.search.service.ImageService;
 import org.opencv.core.Core;
@@ -61,9 +62,10 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public List<String> cutImage(List<Rect> rects,BufferedImage bufferedImage) {
+    public DetectResult cutImage(List<Rect> rects, BufferedImage bufferedImage) {
+        DetectResult detectResult=new DetectResult();
         List<String> imageUrls=new ArrayList<>();
-         if(CollectionUtils.isEmpty(rects)){
+        if(CollectionUtils.isEmpty(rects)){
             throw new BusinessException("未检测出人脸");
         }
         byte[] data = ((DataBufferByte) bufferedImage.getRaster().getDataBuffer()).getData();
@@ -71,15 +73,23 @@ public class ImageServiceImpl implements ImageService {
         bigPicMat.put(0,0,data);
         FileTool.checkPath(imageTmpPath);
         String serverAddress = ApplicationTool.getContextInfo();
+        //存储大图
+        String bkgName = FileTool.createImageName();
+        String localBkgUrl = FileTool.createLocalUrl(bkgName);
+        String netBkgUrl = FileTool.createNetUrl(serverAddress, bkgName);
+        Imgcodecs.imwrite(localBkgUrl,bigPicMat);
+        detectResult.setBkgUrl(netBkgUrl);
+        //存储小图
         for(int i=0;i<rects.size();i++){
             Mat cutMat=new Mat(bigPicMat,transRect(rects.get(i)));
-            String imageName=System.currentTimeMillis()+"_" +UUID.randomUUID().toString().replace("-","")+".jpg";
-            String cutImageName=imageTmpPath+File.separator+imageName;
-            String netUrl=serverAddress+"/image"+imageName;
+            String imageName= FileTool.createImageName();
+            String cutImageName=FileTool.createLocalUrl(imageName);
+            String netUrl=FileTool.createNetUrl(serverAddress,imageName);
             Imgcodecs.imwrite(cutImageName,cutMat);
             imageUrls.add(netUrl);
         }
-        return imageUrls;
+        detectResult.setFaceUrls(imageUrls);
+        return detectResult;
     }
 
     private org.opencv.core.Rect transRect(Rect rect){
@@ -90,6 +100,4 @@ public class ImageServiceImpl implements ImageService {
         org.opencv.core.Rect oRect=new org.opencv.core.Rect(x,y,width,height);
         return oRect;
     }
-
-
 }

@@ -2,6 +2,7 @@ package human.search.service;
 
 import com.arcsoft.face.Rect;
 import com.arcsoft.face.toolkit.ImageInfo;
+import human.search.controller.vo.DetectResult;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -27,5 +28,5 @@ public interface ImageService {
      * @param rects
      * @return
      */
-    public List<String> cutImage(List<Rect> rects,BufferedImage bufferedImage);
+    public DetectResult cutImage(List<Rect> rects, BufferedImage bufferedImage);
 }

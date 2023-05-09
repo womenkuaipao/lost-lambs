@@ -45,6 +45,8 @@ public class ApplicationTool implements ApplicationContextAware, EnvironmentAwar
         }
     }
 
-
+    public static String getParam(String key){
+        return environment.getProperty(key);
+    }
 
 }

@@ -39,7 +39,7 @@
               "wrapperComponent": "",
               "inline": false,
               "id": "u:7a4c314001b4",
-              "schemaApi":"get:/json/publish.json"
+              "schemaApi":"get:${root}/json/publish.json"
             }
           ],
           "id": "u:25221b1db620"
